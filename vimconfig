@@ -31,6 +31,10 @@ set nowb
 set noswapfile
 set nobackup
 
+set belloff=all
+
+set listchars=eol:$,tab:>-
+
 "
 "
 "
@@ -39,6 +43,9 @@ let mapleader = '\'
 
 nnoremap <leader>rc :source ~/.vimrc<cr>
 nnoremap <leader>lp :call LoadProject()<cr>
+
+nnoremap <leader>ssc :set list<cr>
+nnoremap <leader>hsc :set nolist<cr>
 
 "
 "

@@ -4,9 +4,6 @@ alias ls='ls --color=auto'
 
 export EDITOR=vim
 
-export PATH=$HOME/tools/toolchain/bin:$PATH
-export PATH=$HOME/tools/shellcheck:$PATH
-
 export GIT_AUTHOR_DATE='1970-01-01 00:00:00 +0000'
 export GIT_COMMITTER_DATE='1970-01-01 00:00:00 +0000'
 
@@ -17,9 +14,16 @@ prompt_command()
 	color_reset="\[\e[0m\]"
 	color_red="\[\e[1;31m\]"
 	color_green="\[\e[1;32m\]"
+	color_yellow="\[\e[1;33m\]"
 	color_cyan="\[\e[1;36m\]"
 
-	PS1="┏ $color_cyan\u@\h $color_green[\w]\n$color_reset┗ "
+	PS1="┏ $color_cyan\u@\h "
+
+	if [ $SHLVL -eq 4 ]; then
+		PS1+="$color_yellow(nix-shell) "
+	fi
+
+	PS1+="$color_green[\w]\n$color_reset┗ "
 
 	if [ $last_exit_code -ne 0 ]; then
 		PS1+="$color_red[$last_exit_code]$color_reset "
