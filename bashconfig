@@ -1,6 +1,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias nix-shell='NIX_SHELL=yes nix-shell'
 
 export EDITOR=vim
 
