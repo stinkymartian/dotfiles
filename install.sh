@@ -17,6 +17,7 @@ if [ $# -eq 0 ]; then
 	echo '  git: Install git-related configuration files.'
 	echo '  i3: Install i3-related configuration files.'
 	echo '  kitty: Install kitty-related configuration files.'
+	echo '  alacritty: Install alacritty-related configuration files.'
 elif [ "$1" = bash ]; then
 	assert_file_does_not_exist "$HOME/.bashrc"
 	ln -s "$project_directory/bashconfig" "$HOME/.bashrc"
@@ -37,6 +38,10 @@ elif [ "$1" = kitty ]; then
 	assert_file_does_not_exist "$HOME/.config/kitty/kitty.conf"
 	mkdir -p "$HOME/.config/kitty"
 	ln -s "$project_directory/kittyconfig" "$HOME/.config/kitty/kitty.conf"
+elif [ "$1" = alacritty ]; then
+	assert_file_does_not_exist "$HOME/.config/alacritty/alacritty.yml"
+	mkdir -p "$HOME/.config/alacritty"
+	ln -s "$project_directory/alacrittyconfig" "$HOME/.config/alacritty/alacritty.yml"
 else
 	echo "Argument '$1' is invalid." 1>&2
 	exit 1
