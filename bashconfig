@@ -1,12 +1,19 @@
+# If not running interactively then do not do anything.
 [[ $- != *i* ]] && return
+
+# Aliases
 
 alias ls='ls --color=auto'
 alias nix-shell='NIX_SHELL=yes nix-shell'
 
+# I like Vim
 export EDITOR=vim
 
+# Git date OCD
 export GIT_AUTHOR_DATE='1970-01-01 00:00:00 +0000'
 export GIT_COMMITTER_DATE='1970-01-01 00:00:00 +0000'
+
+# Customize Bash prompt
 
 prompt_command()
 {
@@ -34,3 +41,8 @@ prompt_command()
 }
 
 export PROMPT_COMMAND=prompt_command
+
+# Load "local" settings
+if [ -f $HOME/.bashrc_local ]; then
+	. $HOME/.bashrc_local
+fi
