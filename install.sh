@@ -28,8 +28,11 @@ elif [ "$1" = git ]; then
 	ln -s "$project_directory/gitconfig" "$HOME/.gitconfig"
 elif [ "$1" = i3 ]; then
 	assert_file_does_not_exist "$HOME/.config/i3/config"
+	assert_file_does_not_exist "$HOME/.config/i3status/config"
 	mkdir -p "$HOME/.config/i3"
+	mkdir -p "$HOME/.config/i3status"
 	ln -s "$project_directory/i3config" "$HOME/.config/i3/config"
+	ln -s "$project_directory/i3statusconfig" "$HOME/.config/i3status/config"
 elif [ "$1" = kitty ]; then
 	assert_file_does_not_exist "$HOME/.config/kitty/kitty.conf"
 	mkdir -p "$HOME/.config/kitty"
