@@ -1,0 +1,98 @@
+"
+"
+"
+
+if &compatible
+	set nocompatible
+endif
+
+if &t_Co > 2 || has("gui_running")
+	syntax on
+	set background=dark
+endif
+
+filetype on
+filetype plugin on
+filetype indent on
+
+set fileformats=unix
+
+set encoding=utf-8
+set fileencoding=utf-8
+
+set backspace=indent,eol,start
+
+set noexpandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+set nowb
+set noswapfile
+set nobackup
+
+"
+"
+"
+
+let mapleader = '\'
+
+nnoremap <leader>rc :source ~/.vimrc<cr>
+nnoremap <leader>lp :call LoadProject()<cr>
+
+"
+"
+"
+
+function! LoadProject()
+	if filereadable("scripts/project.vim")
+		:source scripts/project.vim
+	else
+		:echo "No project file could be found."
+	endif
+endfunction
+
+"
+"
+"
+
+function! DisableMatchParen()
+	if exists(":NoMatchParen")
+		:NoMatchParen
+	endif
+endfunction
+
+augroup disable_match_paren
+	autocmd!
+	autocmd VimEnter * call DisableMatchParen()
+augroup END
+
+"
+"
+"
+
+highlight User1 ctermfg=15 ctermbg=0
+highlight User2 ctermfg=0 ctermbg=7
+
+let g:custom_status_line_modes = {
+	\ 'n' : '[normal] ',
+	\ 'i' : '[insert] ',
+	\ 'c' : '[command]',
+	\ 'v' : '[visual] ',
+	\ 'R' : '[replace]'
+	\}
+
+function! GetModeForCustomStatusLine()
+	return get(g:custom_status_line_modes,  mode(), '<none>')
+endfunction
+
+set laststatus=2
+
+set statusline=%1*
+set statusline+=\ %{GetModeForCustomStatusLine()}
+set statusline+=\ %f%m%r
+set statusline+=%=
+set statusline+=%y
+set statusline+=[%{&fenc}]
+set statusline+=[%{&ff}]
+set statusline+=\ %4l,%-5v
